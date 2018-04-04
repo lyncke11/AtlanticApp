@@ -1,0 +1,11 @@
+pre-requisite software:
+- python 2.7.14:
+    download and install using instructions on https://www.python.org/downloads/
+- flask 0.12.2:
+    download and install using instructions on https://pypi.python.org/pypi/Flask
+- sqlite3 2.6.0:
+    download and install using instructions on http://www.sqlitetutorial.net/download-install-sqlite/
+- flask_sqlalchemy:
+    type the following in terminal:
+        sudo pip install flask_sqlalchemy
+        sudo pip install sqlalchemy

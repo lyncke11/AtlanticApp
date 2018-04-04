@@ -1,0 +1,24 @@
+INSTRUCTIONS
+- Ensure all pre-reqs are installed
+- Open and save AtlanticApp folder (database should already be in folder with tables)
+- From terminal, move into the saved folder
+- Type 'python app.py' 
+- Go to http://localhost:5000
+- Upload test file (or whatever file you want to test with)
+- Click submit 
+
+CHECK TO SEE DATA WAS ADDED
+- go back to AtlanticApp folder in terminal
+- type 'sqlite3 atlanticapp.db'
+- type '.tables'
+- check your data is in the tables by typing 'select * from customer;', 'select * from product;', 'select * from purchase;'
+- data should be added
+
+USING A DIFFERENT DB
+- if you want to create a new database, change the name of app.config['SQLALCHEMY_DATABASE_URI'] in app.py to corresponding name
+- in AtlanticApp folder in terminal, type sqlite3 '*YOUR DB NAME*.db' to create the db
+- the add tables type:
+    > python
+    > from app import db
+    > db.create_all()
+- you now have a new db with blank tables
