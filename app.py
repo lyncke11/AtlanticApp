@@ -12,17 +12,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///atlanticapp.db'
 db = SQLAlchemy(app)
 
 # order of the columns in input
-COLS = ['cust_id',
-        'cust_first_name',
-        'cust_last_name',
-        'cust_street',
-        'cust_state',
-        'cust_zip_code',
-        'purchase_status',
-        'prod_id',
-        'prod_name',
-        'purchase_amt',
-        'purchase_date']
+COLS = {'cust_id': 0,
+        'cust_first_name': 1,
+        'cust_last_name': 2,
+        'cust_street': 3,
+        'cust_state': 4,
+        'cust_zip_code': 5,
+        'purchase_status': 6,
+        'prod_id': 7,
+        'prod_name': 8,
+        'purchase_amt': 9,
+        'purchase_date': 10}
 
 class Customer(db.Model):
     __tablename__ = 'customer'
@@ -51,37 +51,39 @@ class Purchase(db.Model):
     product = db.relationship("Product", backref=db.backref("product", uselist=False))
     purchase_amt = db.Column(db.String)
     purchase_date = db.Column(db.String)
-    
+    purchase_status = db.Column(db.String)
+
 def writeCustomer(row):
     # first make sure customer is not already in table
-    customer_id = row[COLS.index('cust_id')]
+    customer_id = row[COLS['cust_id']]
     exists = db.session.query(Customer.cust_id).filter_by(cust_id=customer_id).scalar() is not None
     if not exists:
         custRow = Customer(cust_id=customer_id,
-                           cust_first_name=row[COLS.index('cust_first_name')],
-                           cust_last_name=row[COLS.index('cust_last_name')],
-                           cust_street=row[COLS.index('cust_street')],
-                           cust_state=row[COLS.index('cust_state')],
-                           cust_zip_code=row[COLS.index('cust_zip_code')])
+                           cust_first_name=row[COLS['cust_first_name']],
+                           cust_last_name=row[COLS['cust_last_name']],
+                           cust_street=row[COLS['cust_street']],
+                           cust_state=row[COLS['cust_state']],
+                           cust_zip_code=row[COLS['cust_zip_code']])
 
         db.session.add(custRow)
         db.session.commit()
 
 def writeProduct(row):
     # first make sure product not aleady in table
-    product_id = row[COLS.index('prod_id')]
+    product_id = row[COLS['prod_id']]
     exists = db.session.query(Product.prod_id).filter_by(prod_id=product_id).scalar() is not None
     if not exists:
         prodRow = Product(prod_id=product_id,
-                          prod_name=row[COLS.index('prod_name')])
+                          prod_name=row[COLS['prod_name']])
         db.session.add(prodRow)
         db.session.commit()
 
 def writePurchase(row):
-    purchaseRow = Purchase(cust_id=row[COLS.index('cust_id')],
-                           prod_id=row[COLS.index('prod_id')],
-                           purchase_amt=row[COLS.index('purchase_amt')],
-                           purchase_date=row[COLS.index('purchase_date')])
+    purchaseRow = Purchase(cust_id=row[COLS['cust_id']],
+                           prod_id=row[COLS['prod_id']],
+                           purchase_amt=row[COLS['purchase_amt']],
+                           purchase_date=row[COLS['purchase_date']],
+                           purchase_status=row[COLS['purchase_status']])
     db.session.add(purchaseRow)
     db.session.commit()
 
