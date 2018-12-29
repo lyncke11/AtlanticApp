@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='AtlanticApp',
-    version='',
+    version='0.2',
     packages=['venv.Lib.distutils', 'venv.Lib.encodings', 'venv.Lib.site-packages.pip',
               'venv.Lib.site-packages.pip._vendor', 'venv.Lib.site-packages.pip._vendor.idna',
               'venv.Lib.site-packages.pip._vendor.pep517', 'venv.Lib.site-packages.pip._vendor.pytoml',
@@ -52,7 +52,7 @@ setup(
               'venv.Lib.site-packages.flask_sqlalchemy'],
     url='',
     license='',
-    author='Kelly',
+    author='Kelly Lynch',
     author_email='',
     description=''
 )
